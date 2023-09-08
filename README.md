@@ -1,0 +1,1 @@
+Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
