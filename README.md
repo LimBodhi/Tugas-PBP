@@ -9,7 +9,7 @@ Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
 4. MVC (Model-View-Controller), MVT (Model-View-Template), dan MVVM (Model-View-ViewModel) adalah tiga pola arsitektur perangkat lunak yang umum digunakan dalam pengembangan aplikasi web. Ketiga pola arsitektur tersebut memiliki konsep yang mirip dalam memisahkan visualisasi, pemrosesan, dan manajemen data. Ketiga pola arsitektur tersebut bertujuan untuk meningkatkan fleksibilitas, kemudahan pengujian, dan pemeliharaan aplikasi yang mudah.
 
 MVC (Model-View-Controller):
-    Model MVC terbagi menjadi tiga komponen utama yaitu model yang bertugas struktur data, view yang berperan mengatur tampilan yang ditampilkan ke pengguna (user), dan controller yang berperan dalam mengatur dan memberikan update ke model dan view
+Model MVC terbagi menjadi tiga komponen utama yaitu model yang bertugas struktur data, view yang berperan mengatur tampilan yang ditampilkan ke pengguna (user), dan controller yang berperan dalam mengatur dan memberikan update ke model dan view
 
 MVT (Model-View-Templates)
-    Model MVT terbagi menjadi tiga komponen utama yaitu model yang bertugas untuk mengurus struktur data, view yang berperan mengatur tampilan yang ditampilkan ke pengguna (user), dan templates yang berfungsi 
+Model MVT terbagi menjadi tiga komponen utama yaitu model yang bertugas untuk mengurus struktur data, view yang berperan mengatur tampilan yang ditampilkan ke pengguna (user), dan templates yang berfungsi 
