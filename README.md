@@ -1,12 +1,21 @@
+Nama  : Lim Bodhi Wijaya
+NPM   : 2206082410
+Kelas : PBP C
+
+[Tugas 2](#Tugas-2)
+[Tugas 3](#Tugas-3)
+
 # Tugas 2
 
-Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
+## Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
 
-1. Hal pertama yang saya lakukan adalah membuat file bernama `Tugas_2`, kemudian saya mengaktifkan virtual environment dengan menggunakan kode "env\Scripts\activate.bat". Selanjutnya saya membuat projek dengan menggunakan kode "django-admin startproject Tugas_2 .". Setelah itu saya membuat aplikasi dengan kode "python manage.py startapp main" Setelah itu saya membuat program views milik app untuk melakukan return template dan response berisi data nama aplikasi, nama, dan kelas. Setelah itu saya membuat class items di models.py milik app beserta dengan attribute class-nya.
+## **1. Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti *tutorial*).**
 
-2. 
+### Hal pertama yang saya lakukan adalah membuat *file* bernama `Tugas_2`, kemudian saya mengaktifkan *virtual environment* dengan menggunakan kode `env\Scripts\activate.bat`. Selanjutnya saya membuat projek dengan menggunakan kode `django-admin startproject Tugas_2 .`. Setelah itu saya membuat aplikasi dengan kode `python manage.py startapp main`. Kemudian saya membuat program *views* milik app untuk melakukan *return template* dan *response* berisi data nama aplikasi, nama, dan kelas. Setelah itu saya membuat *class items* di models.py milik app beserta dengan *attribute class*-nya.
 
-3. Penggunaan virtual environment dilakukan untuk mengisolasi environment pembuatan aplikasi web berbasis django agar tidak terjadi konflik saat development dengan environment asli pada laptop. Dengan menggunakan virtual environment kita dapat melakukan upgrade maupun downgrade pada aplikasi penunjang development tanpa mempengaruhi environment utama pada laptop kita. Proyek django tetap dapat dibuat tanpa menggunakan virtual environment terlebih dahulu, namun, sangat disarankan untuk dapat membuat virtual environment untuk mencegah konflik/error.
+## **3. Buatlah bagan yang berisi *request client* ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `html`.**
+
+### Penggunaan virtual environment dilakukan untuk mengisolasi environment pembuatan aplikasi web berbasis django agar tidak terjadi konflik saat development dengan environment asli pada laptop. Dengan menggunakan virtual environment kita dapat melakukan upgrade maupun downgrade pada aplikasi penunjang development tanpa mempengaruhi environment utama pada laptop kita. Proyek django tetap dapat dibuat tanpa menggunakan virtual environment terlebih dahulu, namun, sangat disarankan untuk dapat membuat virtual environment untuk mencegah konflik/error.
 
 4. MVC (Model-View-Controller), MVT (Model-View-Template), dan MVVM (Model-View-ViewModel) adalah tiga pola arsitektur perangkat lunak yang umum digunakan dalam pengembangan aplikasi web. Ketiga pola arsitektur tersebut memiliki konsep yang mirip dalam memisahkan visualisasi, pemrosesan, dan manajemen data. Ketiga pola arsitektur tersebut bertujuan untuk meningkatkan fleksibilitas, kemudahan pengujian, dan pemeliharaan aplikasi yang mudah.
 
