@@ -1,4 +1,4 @@
-#Tugas 2
+# Tugas 2
 
 Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
 
