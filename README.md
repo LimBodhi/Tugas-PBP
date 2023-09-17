@@ -18,6 +18,9 @@ Hal pertama yang saya lakukan adalah membuat *file* bernama `Tugas_2`, kemudian 
 
 ### **2. Buatlah bagan yang berisi *request client* ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara `urls.py`, `views.py`, `models.py`, dan berkas `html`.**
 
+<img src="Diagram Tugas 2 PBP.png" alt="Diagram hubungan urls, views, model serta html">
+pertama *user* atau *client* akan meminta *request* ke url yang sesuai pada `urls.py`, kemudian django akan membuka file tersebut dan meminta tampilan dengan menggunakan `view.py`, selanjutnya model `model.py` akan menangani permintaan *user* terkait data dan template yang berisi file html yang digunakan sebagai kerangka tampilan. Setelah selesai diproses data - data tersebut dikembalikan dan ditampilkan kepada *user*.
+
 ### **3. Jelaskan mengapa kita menggunakan *virtual environment*? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan *virtual environment*?**
 
 Penggunaan *virtual environment* dilakukan untuk mengisolasi *environment* pembuatan aplikasi web berbasis django agar tidak terjadi konflik saat *development* dengan *environment* asli pada laptop. Dengan menggunakan *virtual environment* kita dapat melakukan *upgrade* maupun *downgrade* pada aplikasi penunjang *development* tanpa mempengaruhi *environment* utama pada laptop kita. Proyek django tetap dapat dibuat tanpa menggunakan *virtual environment* terlebih dahulu, namun, sangat disarankan untuk dapat membuat *virtual environment* untuk mencegah konflik/*error*.
@@ -28,14 +31,14 @@ MVC (Model-View-Controller), MVT (Model-View-Template), dan MVVM (Model-View-Vie
 
 **Model-View-Controller (MVC)**
 
-[1] Model MVC terbagi menjadi tiga komponen utama yaitu **model** yang bertugas mengelola data dan mengatur logika aplikasi, **view** yang berperan mengatur tampilan yang ditampilkan ke pengguna (*user*), dan **controller** yang berperan dalam mengatur dan memberikan *update* ke model dan *view*
+[1] Model MVC terbagi menjadi tiga komponen utama yaitu **model** yang bertugas mengelola data dan mengatur logika aplikasi, **view** yang berperan mengatur tampilan yang ditampilkan ke pengguna (*user*), dan **controller** yang berperan dalam mengatur dan memberikan *update* ke model dan *view*.
 
 [2] **Kelebihan**
 
-- *Businiss logic* terpisah dari model
-- Mendukung teknik asinkron
+- *Businiss logic* terpisah dari model.
+- Mendukung teknik asinkron.
 - Modifikasi yang dilakukan di salah satu komponen tidak mempengaruhi komponen lain.
-- Proses pengembangan lebih cepat
+- Proses pengembangan lebih cepat.
 
 **Kekurangan**
 
@@ -45,27 +48,32 @@ MVC (Model-View-Controller), MVT (Model-View-Template), dan MVVM (Model-View-Vie
 
 *source*: 
 [1] <a href="URL">https://www.geeksforgeeks.org/mvc-framework-introduction/</a>
+
 [2] <a href="URL">https://lobothijau.medium.com/arsitektur-mvc-vs-mvp-vs-mvvm-di-pemrograman-android-387d9c99e893</a>
 
-**Model-View-Template (MTV)**
+**Model-View-Template (MVT)**
 
 Model MVT terbagi menjadi tiga komponen utama yaitu **model** yang bertugas untuk mengatur logika aplikasi dan mengelola data, **view** yang berperan mengatur bagaimana data yang dikelola oleh model kemudian ditampilkan ke pengguna (*user*), dan **templates** yang berfungsi mengatur tampilan antarmuka pengguna serta memisahkan antara kode HTML dengan logika aplikasi.
 
-**Model-View-ViewModel (MVVP)**
+**Model-View-ViewModel (MVVM)**
 
 [1] Model MVVM memiliki tiga komponen utama yaitu **model** yang bertugas untuk mengatur logika aplikasi dan mengelola data, **view** berperan dalam mengatur tampilan yang akan dilihat oleh pengguna (*user*), dan **viewmodel** yang berperan dalam menghubungkan model dan *view*, serta mengatur tampilan sesuai format yang diinginkan oleh *user*.
 
 [2] **Kelebihan**
 
-- Tidak ada hubungan erat antar *view* dan *view* model
-- Tidak ada *interface* antara *view* dan model
+- Tidak ada hubungan erat antar *view* dan *view* model.
+- Tidak ada *interface* antara *view* dan model.
 - Mudah untuk menulis *unit testing* dan kodenya pun *event-driven*.
 
 **Kekurangan**
 
-- Harus membuat *observable* untuk setiap komponen UI
-- Kode yang ditulis cenderung banyak
+- Harus membuat *observable* untuk setiap komponen UI.
+- Kode yang ditulis cenderung banyak.
 
 *source*: 
 [1] <a href="URL">https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm</a>
+
 [2] <a href="URL">https://lobothijau.medium.com/arsitektur-mvc-vs-mvp-vs-mvvm-di-pemrograman-android-387d9c99e893</a>
+
+**Perbedaan dari ketiga *framework***
+*Controller* pada MVC yang berperan dalam dalam memberikan *update* ke model dan *view*, akan tetapi peran *view* pada MVC serupa dengan *template* pada MVT sedangkan *view* pada MVT berperan dalam mengatur tampilan antar muka agar sesuai dengan keinginan pengguna. Pada MVVM komponen *viewmodel* menjadi perantara dalam mengatur model dan *view* yang akan ditampilkan pada pengguna. 
