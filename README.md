@@ -76,4 +76,5 @@ Model MVT terbagi menjadi tiga komponen utama yaitu **model** yang bertugas untu
 [2] <a href="URL">https://lobothijau.medium.com/arsitektur-mvc-vs-mvp-vs-mvvm-di-pemrograman-android-387d9c99e893</a>
 
 **Perbedaan dari ketiga *framework***
+
 *Controller* pada MVC yang berperan dalam dalam memberikan *update* ke model dan *view*, akan tetapi peran *view* pada MVC serupa dengan *template* pada MVT sedangkan *view* pada MVT berperan dalam mengatur tampilan antar muka agar sesuai dengan keinginan pengguna. Pada MVVM komponen *viewmodel* menjadi perantara dalam mengatur model dan *view* yang akan ditampilkan pada pengguna. 
