@@ -106,7 +106,7 @@ Model MVT terbagi menjadi tiga komponen utama yaitu **model** yang bertugas untu
 ## perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data
 
 ### Extensible Markup Language (XML)
-Extensible Markup Language (XML) menyimpan data dalam hirarki berbentuk pohon yang diawali dengan *namespace* yang berbeda - beda tergantung pada setiap kategori. XML mendukung pengiriman data berupa JSON, *namespace*, boolean, dll. Contoh XML:
+Extensible Markup Language (XML) menyimpan data dalam hirarki berbentuk pohon (*tree*) yang diawali dengan *root element* yang berbeda - beda tergantung pada setiap kategori kemudian diikuti oleh *branches* hingga *leaves*. XML mendukung pengiriman data berupa JSON, *namespace*, boolean, dll. Contoh XML:
 
 ``` python
 <person>
@@ -116,7 +116,7 @@ Extensible Markup Language (XML) menyimpan data dalam hirarki berbentuk pohon ya
 ```
 
 ### JavaScript Object Notation (JSON)
- JavaScript Object Notation (JSON) merupakan format yang digunakan untuk membaca, menyimpan, serta bertukar informasi dengan *webserver*. JSON umumnya menyimpan data dengan format *array* sehingga memudahkan proses *transfer data*, namun mengakibatkan kurang terbacanya kode json pada manusia. Format JSON mendukung pengiriman data berupa string, angka, objek, boolean. Contoh JSON:
+ JavaScript Object Notation (JSON) merupakan format yang digunakan untuk membaca, menyimpan, serta bertukar informasi dengan *webserver*. JSON umumnya menyimpan data dengan format *array* sehingga memudahkan proses *transfer data*, namun mengakibatkan kurang terbacanya kode json pada manusia. Format JSON mendukung pengiriman data berupa tipe data primitif seperti string, angka, boolean, hingga objek. Contoh JSON:
 
  ``` python
  {
@@ -147,3 +147,193 @@ Hypertext Markup Language (HTML) umumnya digunakan sebagai kerangka penyusunan d
 - <a href="URL">https://www.dicoding.com/blog/apa-itu-json/</a>
 - <a href="URL">https://aws.amazon.com/id/compare/the-difference-between-json-xml/</a>
 - <a href="URL">https://www.hostinger.co.id/tutorial/apa-itu-html</a>
+
+## Alasan JSON sering digunakan dalam pertukaran data antara aplikasi web modern
+- Dapat menyimpan data dalam bentuk array sehingga proses *transfer* data menjadi lebih mudah
+- Sintaks lebih ringan dan berukuran lebih kecil
+- Mendukung beberapa bahasa pemrograman sehingga mudah digunakan
+- Lebih cepat dalam hal *parsing* data dari sisi *server*
+
+*source* : <a href="URL">https://www.dicoding.com/blog/apa-itu-json/</a>
+
+## Proses Pengerjaan Tugas 3
+
+1. Membuat berkas html yang nantinya akan digunakan sebagai template untuk tampilan web lainnya
+
+``` python
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
+```
+2. Membuat struktur forms input 
+
+``` python
+from django.forms import ModelForm
+from main.models import Product
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "price", "description"]
+```
+3. Membuat fungsi untuk menambahkan input
+
+``` python 
+def create_product(request):
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+4. membuat berkas html untuk *create product*
+
+``` python
+{% extends 'base.html' %} 
+
+{% block content %}
+<h1>Add New Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+```
+5. Membuat tampilan produk yang telah ditambahkan
+
+``` python
+...
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Date Added</th>
+    </tr>
+
+    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+    {% for product in products %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.date_added}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+    <button>
+        Add New Product
+    </button>
+</a>
+
+{% endblock content %}
+```
+
+### Mengembalikan data sesuai dengan format yang diinginkan
+1. Menambahkan fungsi untuk menampilkan data dalam bentuk HTML
+``` python
+def show_main(request):
+    products = Product.objects.all()
+
+    context = {
+        'name': 'nama',
+        'class': 'kelas PBP',
+        'products': products
+    }
+
+    return render(request, "main.html", context)
+```
+kemudian tambahkan kode berikut pada `main.html` setelah blok `{% block content %}`
+
+``` python
+...
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Date Added</th>
+    </tr>
+
+    {% for product in products %}
+        <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.date_added}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
+```
+2. Menambahkan fungsi untuk menampilkan data dalam bentuk XML
+``` python
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+```
+
+2. Menambahkan fungsi untuk menampilkan data dalam bentuk JSON
+``` python
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+3. Menambahkan fungsi untuk menampilkan data berdasarkan id XML
+``` python
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+```
+4. Menambahkan fungsi untuk menampilkan data berdasarkan id JSON
+``` python
+def show_json_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+
+## Screenshoot hasil akses URL pada postman
+<img src="Postman_HTML (1).jpg" alt="Postman HTML (Pretty)">
+<img src="Postman_HTML (2).jpg" alt="Postman HTML (Visualization)">
+<img src="Postman_JSON (1).jpg" alt="Postman JSON (Pretty)">
+<img src="Postman_JSON (2).jpg" alt="Postman JSON (Visualization)">
+<img src="Postman_XML (1).jpg" alt="Postman XML (Pretty)">
+<img src="Postman_XML (2).jpg" alt="Postman XML (Visualization)">
+<img src="Postman_JSON_byID (1).jpg" alt="Postman JSON ID 1">
+<img src="Postman_JSON_byID (2).jpg" alt="Postman JSON ID 2">
+<img src="Postman_XML_byID (1).jpg" alt="Postman XML ID 1">
+<img src="Postman_XML_byID (2).jpg" alt="Postman XML ID 2">
