@@ -328,11 +328,11 @@ def show_json_by_id(request, id):
 
 ## Screenshoot hasil akses URL pada postman
 <img src="Postman_HTML (1).jpg" alt="Postman HTML (Pretty)">
-<img src="Postman_HTML (2).jpg" alt="Postman HTML (Visualization)">
+<img src="Postman_HTML (2).jpg" alt="Postman HTML (Preview)">
 <img src="Postman_JSON (1).jpg" alt="Postman JSON (Pretty)">
-<img src="Postman_JSON (2).jpg" alt="Postman JSON (Visualization)">
+<img src="Postman_JSON (2).jpg" alt="Postman JSON (Preview)">
 <img src="Postman_XML (1).jpg" alt="Postman XML (Pretty)">
-<img src="Postman_XML (2).jpg" alt="Postman XML (Visualization)">
+<img src="Postman_XML (2).jpg" alt="Postman XML (Preview)">
 <img src="Postman_JSON_byID (1).jpg" alt="Postman JSON ID 1">
 <img src="Postman_JSON_byID (2).jpg" alt="Postman JSON ID 2">
 <img src="Postman_XML_byID (1).jpg" alt="Postman XML ID 1">
