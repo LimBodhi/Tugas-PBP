@@ -78,3 +78,72 @@ Model MVT terbagi menjadi tiga komponen utama yaitu **model** yang bertugas untu
 **Perbedaan dari ketiga *framework***
 
 *Controller* pada MVC yang berperan dalam dalam memberikan *update* ke model dan *view*, akan tetapi peran *view* pada MVC serupa dengan *template* pada MVT sedangkan *view* pada MVT berperan dalam mengatur tampilan antar muka agar sesuai dengan keinginan pengguna. Pada MVVM komponen *viewmodel* menjadi perantara dalam mengatur model dan *view* yang akan ditampilkan pada pengguna. 
+
+
+# Tugas 3
+
+## Perbedaan antara form `post` dan form `get` pada django
+
+**Post**
+
+- Nilai variabel tidak ditampilkan pada URL
+- Umumnya digunakan untuk menginput data dari *form*
+- Tidak ada batasan panjang *string*
+- Digunakan untuk mengirimkan data - data penting
+- Lebih aman 
+
+**Get**
+
+- Nilai variabel ditampilkan pada URL
+- Umumnya digunakan untuk menginput data melalui *link*
+- Terdapat batasan panjang *string* sebesar 2047 karakter
+- Digunakan untuk data - data yang bersifat umum
+- Kurang aman
+
+*source*
+<a href="URL">https://gist.github.com/rririanto/442f0590578ca3f8648aeba1e25f8762</a>
+
+## perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data
+
+### Extensible Markup Language (XML)
+Extensible Markup Language (XML) menyimpan data dalam hirarki berbentuk pohon yang diawali dengan *namespace* yang berbeda - beda tergantung pada setiap kategori. XML mendukung pengiriman data berupa JSON, *namespace*, boolean, dll. Contoh XML:
+
+``` python
+<person>
+  <name>Bodhi</name>
+  <age>19</age>
+</person>
+```
+
+### JavaScript Object Notation (JSON)
+ JavaScript Object Notation (JSON) merupakan format yang digunakan untuk membaca, menyimpan, serta bertukar informasi dengan *webserver*. JSON umumnya menyimpan data dengan format *array* sehingga memudahkan proses *transfer data*, namun mengakibatkan kurang terbacanya kode json pada manusia. Format JSON mendukung pengiriman data berupa string, angka, objek, boolean. Contoh JSON:
+
+ ``` python
+ {
+  "person": {
+    "name": "Bodhi",
+    "age": 19
+  }
+}
+ ```
+
+### Hypertext Markup Language (HTML)
+Hypertext Markup Language (HTML) umumnya digunakan sebagai kerangka penyusunan dan pembuatan laman pada web maupun aplikasi. HTML sendiri tidak melakukan pengiriman data. Contoh HTML:
+
+``` python 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contoh HTML</title>
+</head>
+<body>
+  <h1>Selamat datang!</h1>
+  <p>Ini adalah contoh halaman HTML.</p>
+</body>
+</html>
+```
+
+*source*:
+- <a href="URL">https://www.dicoding.com/blog/apa-itu-json/</a>
+- <a href="URL">https://aws.amazon.com/id/compare/the-difference-between-json-xml/</a>
+- <a href="URL">https://www.hostinger.co.id/tutorial/apa-itu-html</a>
