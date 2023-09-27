@@ -89,3 +89,19 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def decrement(request, id):
+    product = Product.objects.get(pk=id)
+    product.amount -= 1
+    product.save()
+    if product.amount == 0:
+        product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+
+def increment(request, id):
+    product = Product.objects.get(pk=id)
+    product.amount += 1
+    product.save()
+    if product.amount == 0:
+        product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))

@@ -6,29 +6,90 @@
 
 {% block content %}  
 
-<div class = "login">
-    
+<div class="Title">
     <h1>Register</h1>  
+</div>
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
+<div class="register-container">
+
+    <form method="POST">  
+        {% csrf_token %}  
+        <table>  
+            {{ form.as_table }}  
+            <tr>  
+                <td></td>
+                <td><input type="submit" name="submit" value="Daftar" class="btn-submit"/></td>  
+            </tr>  
+        </table>  
+    </form>
 
     {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
+        <div class="message-container">
+            <ul>   
+                {% for message in messages %}  
+                    <li>{{ message }}</li>  
                 {% endfor %}  
-        </ul>   
+            </ul>
+        </div>
     {% endif %}
 
 </div>  
+
+<style>
+        .Title {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .register-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: left;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .btn-submit {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .btn-submit:hover {
+        background-color: #0056b3;
+    }
+
+    /* Style for the message container */
+    .message-container {
+        margin-top: 20px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: left;
+    }
+
+    .message-container ul {
+        list-style: none;
+        padding-left: 10;
+    }
+
+    .message-container li {
+        margin-bottom: 5px;
+    }
+</style>
 
 {% endblock content %}
