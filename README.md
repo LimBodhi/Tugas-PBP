@@ -10,6 +10,8 @@ Kelas : PBP C
 
 [Tugas 4](#Tugas-4)
 
+[Tugas 5](#Tugas-5)
+
 # Tugas 2
 
 #### Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
@@ -570,3 +572,113 @@ Langkah terakhir adalah melakukan migrasi pada model agar perubahan yang dilakuk
 `username = user2`
 `password = Usr2PBP2023`
 <img src="User 2.jpg" alt="User 2">
+
+# Tugas 5
+
+## Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya
+### Universal Selector (*)
+Universal Selector digunakan untuk memilih semua elemen yang ada pada halaman web.  Universal Selector dapat digunakan pada saat kita ingin mengatur *style* pada semua elemen yang ada pada halaman web.
+```python
+* {
+   color: blue;
+   background-color: white;
+  }
+```
+### Type Selector
+Type Selector digunakan untuk memilih elemen berdasarkan tipe elemen tersebut. Type Selector dapat digunakan pada saat kita ingin mengatur *style* pada elemen yang memiliki tipe yang sama.
+```python
+h1 {text-decoration: underline;}
+p {font-size:14px;}
+```
+
+### Class Selector
+Class selector digunakan untuk memilih elemen berdasarkan nama kelas yang diberikan. Class Selector dapat digunakan pada saat kita ingin mengatur *style* pada elemen yang memiliki kelas yang sama.
+```python
+p {color: blue;
+   font-size: 14px;
+   font-weight: bold;
+  }
+```
+
+### ID Selector
+ID Selector digunakan untuk memilih elemen berdasarkan nama ID yang diberikan. ID Selector dapat digunakan pada saat kita ingin mengatur *style* pada elemen yang memiliki ID yang sama.
+```python
+#id1 {color: blue;
+   font-size: 14px;
+   font-weight: bold;
+  }
+```
+
+### Attribute Selector
+Attribute Selector digunakan untuk memilih elemen berdasarkan atribut yang diberikan. Attribute Selector dapat digunakan pada saat kita ingin mengatur *style* pada elemen yang memiliki atribut yang sama.
+```python
+input[type="text"] {
+   background-color: yellow;
+  }
+```
+
+Referensi : <a href="URL">https://www.duniailkom.com tutorial-belajar-css-mengenal-jenis-jenis-selector-dasar-css/</a>
+
+##  Jelaskan HTML5 Tag yang kamu ketahui
+HTML5 terdiri dari beberapa tag seperti berikut:
+- `<header>` : tag ini digunakan untuk menunjukkan bagian atas dari halaman web.
+- `<nav>` : tag ini digunakan untuk menunjukkan bagian navigasi dari halaman web.
+- `<section>` : tag ini digunakan untuk menunjukkan bagian utama dari halaman web.
+- `<article>` : tag ini digunakan untuk menunjukkan bagian konten dari halaman web.
+- `<aside>` : tag ini digunakan untuk menunjukkan bagian samping dari halaman web.
+- `<footer>` : tag ini digunakan untuk menunjukkan bagian bawah dari halaman web.
+- `<video>` : tag ini digunakan untuk menunjukkan video pada halaman web.
+- `<audio>` : tag ini digunakan untuk menunjukkan audio pada halaman web.
+- `<canvas>` : tag ini digunakan untuk menunjukkan gambar pada halaman web.
+- `<p>` : tag ini digunakan untuk menunjukkan paragraf pada halaman web.
+- `<div>` : tag ini digunakan untuk menunjukkan divisi pada halaman web.
+- `<span>` : tag ini digunakan untuk menunjukkan bagian dari halaman web.
+- `<href>` : tag ini digunakan untuk menunjukkan link pada halaman web.
+- `<img>` : tag ini digunakan untuk menunjukkan gambar pada halaman web.
+
+## Jelaskan perbedaan antara margin dan padding
+Margin merupakan jarak antara elemen dengan elemen lainnya
+```python
+p {
+   margin-top: 100px;
+   margin-bottom: 100px;
+   margin-right: 150px;
+   margin-left: 80px;
+  }
+```
+Padding merupakan jarak antara elemen dengan konten yang ada di dalam elemen tersebut
+```python
+p {
+   padding-top: 100px;
+   padding-bottom: 100px;
+   padding-right: 150px;
+   padding-left: 80px;
+  }
+```
+
+## Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+### Tailwind
+- Dibuat untuk menghasilkan elemen UI yang fungsional, rapi, dan fleksibel.
+- Lebih fokus pada pengembangan komponen secara modular.
+- Memiliki gaya desain yang minimalis dan lebih mudah disesuaikan dengan kebutuhan pengguna.
+- Memiliki ukuran file yang lebih kecil dibandingkan dengan Bootstrap.
+
+### Bootstrap
+- Lebih besar dalam hal ukuran file karena menyediakan banyak fitur dan komponen.
+- Lebih fokus pada pengembangan aplikasi secara keseluruhan.
+- Memiliki gaya desain yang lebih konsisten dan mudah diimplementasikan.
+- Memiliki lebih banyak dokumentasi dan dukungan komunitas.
+
+### Bagaimana menentukan framework mana yang harus digunakan?
+Bootstrap:
+- Cocok untuk proyek besar yang membutuhkan banyak fitur dan komponen.
+- Cocok untuk pengembangan aplikasi secara keseluruhan.
+- Cocok untuk pengguna yang membutuhkan dokumentasi dan dukungan komunitas yang lebih banyak.
+
+Tailwind CSS:
+- Cocok untuk proyek kecil hingga menengah yang membutuhkan fleksibilitas dan kustomisasi yang lebih besar.
+- Cocok untuk pengembangan komponen secara modular.
+- Cocok untuk pengguna yang ingin mengurangi ukuran file dan lebih fokus pada performa.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* 
+Menambahkan style pada masing - masing file html baik menggunakan *class* maupun *style selector* seperti *padding, ukuran,* dll.
