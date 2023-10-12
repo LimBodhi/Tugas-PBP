@@ -4,6 +4,8 @@ NPM   : 2206082410
 
 Kelas : PBP C
 
+Link : http://lim-bodhi-tugas.pbp.cs.ui.ac.id
+
 [Tugas 2](#Tugas-2)
 
 [Tugas 3](#Tugas-3)
@@ -686,3 +688,40 @@ Tailwind CSS:
 Menambahkan style pada masing - masing file html baik menggunakan *class* maupun *style selector* seperti *padding, ukuran,* dll.
 
 # Tugas 6
+## Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+Synchronous programming merupakan proses eksekusi kode yang dilakukan secara berurutan. Synchronous programming akan menunggu kode yang sedang dieksekusi selesai terlebih dahulu sebelum menjalankan kode selanjutnya. Sedangkan asynchronous programming merupakan proses eksekusi kode yang dilakukan secara bersamaan. Asynchronous programming tidak akan menunggu kode yang sedang dieksekusi selesai terlebih dahulu sebelum menjalankan kode selanjutnya.
+
+## Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+Event-driven programming merupakan proses eksekusi kode yang dilakukan berdasarkan event yang terjadi. Event-driven programming akan menunggu event yang terjadi terlebih dahulu sebelum menjalankan kode selanjutnya. Salah satu contoh penerapannya pada tugas ini adalah ketika kita melakukan klik pada tombol *submit* pada form, maka akan terjadi event yang akan menjalankan kode selanjutnya.
+
+## Jelaskan penerapan asynchronous programming pada AJAX.
+Asynchronous proggraming pada AJAX dilakukan dengan cara melakukan *request* ke *server* untuk mendapatkan data yang dibutuhkan. Setelah itu, *server* akan mengirimkan data yang dibutuhkan ke *client*. Ketika *client* sedang menunggu data yang dibutuhkan, maka *client* akan menjalankan kode selanjutnya. Setelah *client* mendapatkan data yang dibutuhkan, maka *client* akan menampilkan data tersebut ke *web browser*.
+
+## Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.
+
+### Fetch API
+- Fetch API banyak digunakan web modern dan merupakan API resmi yang didukung oleh semua browser utama.
+- Fetch API menggunakan *promise* yang memungkinkan penanganan *request* secara asinkronus dengan cara yang yang relatif lebih mudah.
+- Fetch API adalah API JavaScript yang lebih ringan daripada jQuery.Hal ini dapat mengurangi *source load *halaman dan mempercepat *load time*.
+
+### jQuery
+- jQuery memiliki dukungan untuk browser lama dan baru. Ini memungkinkan pembuatan web yang compatible dengan berbagai jenis browser baik lama maupun baru.
+- jQuery dianggap lebih mudah digunakan oleh pemula karena memiliki sintaks yang lebih sederhana dan mudah dibaca.
+- jQuery memiliki jumlah plugin yang besar dan dapat membantu dalam membuat berbagai operasi atau fungsi.
+
+Berdasarkan perbedaan diatas, menurut saya penggunaan Fetch API untuk AJX lebih baik dibandingkan JQuery karena dapat meningkatkan *load time*, lebih ringan, serta lebih mudah untuk digunakan.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*.
+1.  Buat fungsi baru di `views.py` dengan nama `get_product_json` seperti berikut:
+``` python
+def get_product_json(request):
+    products = Product.objects.all()
+    data = serializers.serialize('json', products)
+    return HttpResponse(data, content_type='application/json')
+```
+fungsi `get_product_json` akan mengambil data JSON berdasarkan item yang dimiliki user. 
+2. Import fungsi `get_product_json` di dalam `urls.py` pada folder `main` dan tambahkan path url fungsi `get_product_json`.
+``` python
+path('get-product/', get_product_json, name='get_product_json'),
+```
+3. 
