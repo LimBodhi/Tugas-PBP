@@ -12,6 +12,8 @@ Kelas : PBP C
 
 [Tugas 5](#Tugas-5)
 
+[Tugas 6](#Tugas-6)
+
 # Tugas 2
 
 #### Link Adaptable: https://system-kelola-stok-produk-pbp.adaptable.app/main/
@@ -682,3 +684,5 @@ Tailwind CSS:
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* 
 Menambahkan style pada masing - masing file html baik menggunakan *class* maupun *style selector* seperti *padding, ukuran,* dll.
+
+# Tugas 6
