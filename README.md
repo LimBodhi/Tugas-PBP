@@ -775,3 +775,106 @@ async function refreshProducts() {
 </script>
 ```
 Kode disesuaikan dengan button yang diinginkan dan isi tabel. `document.getElementById("product_list") `berfungsi untuk mengambil elemen berdasarkan ID sehingga semua item akan masuk ke dalam *card*.
+
+6. Membuat tombol yang membuka sebuah modal dengan form untuk menambahkan item ke dalam basis data dan menampilkan daftar item terbatu tanpa reload halaman
+``` python
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" name="price"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for "amount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a>
+    <button class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product</button>
+</a>
+```
+Sesuaikan letak button dengan keinginan. 
+7. Buat fungsi `addProduct()` di dalam `<Script>` seperti kode berikut
+``` python
+...
+function addProduct() {
+    fetch("{% url 'main:add_product_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    })
+    .then(refreshProducts);
+
+    document.getElementById("form").reset();
+    return false;
+}
+```
+8. Tambah fungsi onclick pada button `"Add Product"` untuk menjalankan fungsi `addProduct()` melalui kode berikut:
+``` python
+<script>
+...
+document.getElementById("button_add").onclick = addProduct
+</script>
+```
+9. Import from `django.views.decorators.csrf` import `csrf_exempt` dan `HttpResponseNotFound` di dalam `views.py`.
+10. Buat fungsi `add_product_ajax` dan `delete_product_ajax` di dalam `views.py` yang menerima request seperti berikut:
+``` python
+@csrf_exempt
+def add_product_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        amount = request.POST.get("amount")
+        description = request.POST.get("description")
+        user = request.user
+
+        new_product = Product(name=name, price=price, amount=amount, description=description, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def delete_product_ajax(request):
+    if request.method == 'POST':
+        product_id = request.POST.get("product_id") 
+        product = Product.objects.get(pk=product_id)
+        if product.user == request.user:
+            product.delete()
+            return HttpResponse(status=200)
+
+    return HttpResponseNotFound()
+```
+11. Import fungsi `add_product_ajax` dan `delete_product_ajax` di dalam `urls.py` pada folder main dan tambahkan path url fungsi `add_product_ajax` dan `delete_product_ajax`.
+``` python
+    ...
+    path('create-product-ajax/', add_product_ajax, name='add_product_ajax'),
+    path('delete-product-ajax/', delete_product_ajax, name='delete_product_ajax'),
+```
+## Melakukan perintah `collectstatic`
+1. Jalankan virtual environment dengan `env\Scripts\activate.bat`.
+2. Jalankan perintah `python manage.py collectstatic` untuk mengumpulkan file static dari setiap aplikasi ke dalam satu folder.
