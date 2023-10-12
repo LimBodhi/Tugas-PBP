@@ -1,62 +1,141 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form" onsubmit="return false;">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" name="price"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for "amount" class="col-form-label">Amount:</label>
+                        <input type="number" class="form-control" id="amount" name="amount"></input>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <h1>Integrated Stock Review PBP</h1>
 
     <div class="user-info">
+        <h1>Shopping List Page</h1>
+        <br />
+
         <h5>Name:</h5>
-        <p>{{name}}</p>
+        <p>{{ name }}</p>
 
         <h5>Class:</h5>
-        <p>{{class}}</p>
-    </div>
+        <p>{{ class }}</p>
 
-    <table class="product-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Amount</th>
-                <th>Increment</th>
-                <th>Decrement</th>
-                <th>Description</th>
-                <th>Date Added</th>
-            </tr>
-        </thead>
+        <br />
 
-        <tbody>
-            {% for product in products %}
-                <tr>
-                    <td>{{product.name}}</td>
-                    <td>{{product.price}}</td>
-                    <td>{{product.amount}}</td>
-                    <td><a href="{% url 'main:increment' product.id %}" class="button">Increment</a></td>
-                    <td><a href="{% url 'main:decrement' product.id %}" class="button">Decrement</a></td>
-                    <td>{{product.description}}</td>
-                    <td>{{product.date_added}}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <div id="product_list">
+        </div>
 
-    <div class="buttons">
-        <a href="{% url 'main:create_product' %}" class="button">
-            Add New Product
-        </a>
-
-        <a href="{% url 'main:logout' %}" class="button">
-            Logout
-        </a>
-    </div>
-
-    <div class="last-login">
         <h5>Sesi terakhir login: {{ last_login }}</h5>
+        <br />
+        <a href="{% url 'main:logout' %}">
+            <button class="button">
+                Logout
+            </button>
+        </a>
+        <a>
+            <button class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product</button>
+        </a>
     </div>
 </div>
 
+<script>
+async function getProducts() {
+    return fetch("{% url 'main:get_product_json' %}").then((res) => res.json());
+}
+
+async function refreshProducts() {
+    const productContainer = document.getElementById("product_list");
+    if (!productContainer) return;
+
+    const products = await getProducts();
+
+    productContainer.innerHTML = ''; 
+
+    products.forEach((item) => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("card");
+
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
+        cardBody.innerHTML = `
+            <h5 class="card-title">${item.fields.name}</h5>
+            <p>Price: ${item.fields.price}</p>
+            <p>Amount: ${item.fields.amount}</p>
+            <p>Description: ${item.fields.description}</p>
+            <p>Date Added: ${item.fields.date_added}</p>
+            <a href="increment/${item.pk}">
+                <button class="btn btn-primary">Increment</button>
+            </a>
+            <a href="decrement/${item.pk}">
+                <button class="btn btn-danger">Decrement</button>
+            </a>
+            <input type="button" id= "del_button" class="btn btn-danger" value="Delete" onclick ="delProduct(${item.pk})">`;
+        productCard.appendChild(cardBody);
+        productContainer.appendChild(productCard);
+    });
+}
+
+function addProduct() {
+    fetch("{% url 'main:add_product_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    })
+    .then(refreshProducts);
+
+    document.getElementById("form").reset();
+    return false;
+}
+
+function delProduct(key) {
+    const formData = new FormData();
+    formData.append('product_id', key);
+    fetch("{% url 'main:delete_product_ajax' %}", {
+        method: "POST",
+        body: formData
+    }).then(refreshProducts)
+    
+    document.getElementById("form").reset()
+    return false
+}
+
+document.getElementById("button_add").onclick = addProduct;
+
+document.addEventListener("DOMContentLoaded", function() {
+    refreshProducts();
+});
+</script>
+
 <style>
-    /* CSS Styles */
     .container {
         max-width: 800px;
         margin: 0 auto;
@@ -67,26 +146,66 @@
         margin-bottom: 20px;
     }
 
-    .product-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-    .product-table th, .product-table td {
+    .card {
         border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-    
-    .product-table tbody tr:last-child {
-    background-color: #ccc; /* Warna abu-abu */
-    }
-
-    .buttons {
         margin-bottom: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
     }
 
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .card a {
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .last-login {
+        font-style: italic;
+    }
     .button {
         display: inline-block;
         padding: 10px 20px;
@@ -97,14 +216,5 @@
         cursor: pointer;
         font-size: 16px;
     }
-
-    .button:hover {
-        background-color: #0056b3;
-    }
-
-    .last-login {
-        font-style: italic;
-    }
 </style>
-
 {% endblock content %}
