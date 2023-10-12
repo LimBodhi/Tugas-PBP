@@ -724,4 +724,54 @@ fungsi `get_product_json` akan mengambil data JSON berdasarkan item yang dimilik
 ``` python
 path('get-product/', get_product_json, name='get_product_json'),
 ```
-3. 
+3. Buka `main.html` pada `main/templates` dan hapus bagian kode table yang sudah dibuat dan sesuaikan seperti kode berikut:
+``` python
+<div id="product_list"></div>
+```
+4. Buat `<Script>` di bawah berkas dan buat fungsi baru di dalam `<Script>` dengan nama `getProducts()`
+``` python
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+</script>
+```
+Fungsi `getProducts()` akan mengambil data melalui `fetch()` API ke data JSON secara *asynchronous* dan data akan diubah menjadi objek JavaScript. 
+5. Buat fungsi baru bernama `refreshProducts()` di dalam `<Script>` yang akan me-refresh data item secara *asynchronous*.
+``` python
+<script>
+async function refreshProducts() {
+    const productContainer = document.getElementById("product_list");
+    if (!productContainer) return;
+
+    const products = await getProducts();
+
+    productContainer.innerHTML = ''; 
+
+    products.forEach((item) => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("card");
+
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+
+        cardBody.innerHTML = `
+            <h5 class="card-title">${item.fields.name}</h5>
+            <p>Price: ${item.fields.price}</p>
+            <p>Amount: ${item.fields.amount}</p>
+            <p>Description: ${item.fields.description}</p>
+            <p>Date Added: ${item.fields.date_added}</p>
+            <a href="increment/${item.pk}">
+                <button class="btn btn-primary">Increment</button>
+            </a>
+            <a href="decrement/${item.pk}">
+                <button class="btn btn-danger">Decrement</button>
+            </a>
+            <input type="button" id= "del_button" class="btn btn-danger" value="Delete" onclick ="delProduct(${item.pk})">`;
+        productCard.appendChild(cardBody);
+        productContainer.appendChild(productCard);
+    });
+}
+</script>
+```
+Kode disesuaikan dengan button yang diinginkan dan isi tabel. `document.getElementById("product_list") `berfungsi untuk mengambil elemen berdasarkan ID sehingga semua item akan masuk ke dalam *card*.
