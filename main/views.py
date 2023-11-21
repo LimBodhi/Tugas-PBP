@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.core import serializers
@@ -148,6 +149,7 @@ def create_product_flutter(request):
             user = request.user,
             name = data["name"],
             price = int(data["price"]),
+            amount = int(data["amount"]),
             description = data["description"]
         )
 
