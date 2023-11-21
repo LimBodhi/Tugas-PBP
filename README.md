@@ -4,7 +4,7 @@ NPM   : 2206082410
 
 Kelas : PBP C
 
-Link : http://lim-bodhi-tugas.pbp.cs.ui.ac.id
+Link : https://lim-bodhi-tugas.pbp.cs.ui.ac.id
 
 [Tugas 2](#Tugas-2)
 
