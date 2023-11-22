@@ -66,7 +66,8 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
-CRSF_TRUSTED_ORIGINS = ["https://lim-bodhi-tugas.pbp.cs.ui.ac.id/"]
+CSRF_TRUSTED_ORIGINS = ["https://lim-bodhi-tugas.pbp.cs.ui.ac.id/"]
+
 ROOT_URLCONF = 'Tugas_2.urls'
 
 TEMPLATES = [
